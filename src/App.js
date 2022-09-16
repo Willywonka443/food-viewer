@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <SaveIcon />
-        <Typography>
+        <Typography variant="h4">
           William Rocks!
         </Typography>
         <a
