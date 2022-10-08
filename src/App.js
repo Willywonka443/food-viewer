@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 // import {Typography} from '@mui/material';
 // import SaveIcon from '@mui/icons-material/Save';
-import Layout from './components/Layout';
+import Layout from './pages/Layout';
 
 function App() {
   return (

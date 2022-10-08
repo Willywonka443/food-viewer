@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { Typography, Box, AppBar,Toolbar, IconButton, Button, TextField, InputAdornment, Paper  } from '@mui/material'
-import TestGrid from '../pages/TestGrid'
+
 import MenuIcon from '@mui/icons-material/Menu';
-import Search from '../pages/Search'
+import Search from './Search'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
 import yelp from '../api/yelp';
+import Detail from './Detail';
 
 
 
@@ -13,7 +14,8 @@ import yelp from '../api/yelp';
  const Layout = () => {
     const [searchText, setSearchText ]   = useState("I'm here. Good")
     const [results, setResults] = useState([])
-    // let mySearchTest = "I'm here"
+    const [restId, setRestId] = useState('Nothing to see here')
+    
 
     const searchApi = async (term) => {
         const response = await yelp('32244', term )
@@ -27,7 +29,7 @@ import yelp from '../api/yelp';
     }
 
     useEffect(() => {
-        searchApi('Mexican Food')
+        searchApi('Food')
     } , [])
 
      return (
@@ -79,9 +81,12 @@ import yelp from '../api/yelp';
 
              <Typography variant="h6">Your search results:{searchText}</Typography>
              <Routes>
-                <Route exact path="/" element={<Search searchResults={results}/>} />
-                <Route exact path="/testgrid" element={<TestGrid/>} />
-                <Route exact path="/search" element={<Search searchResults={results}/>}/>
+
+				
+                <Route exact path="/" element={<Search searchResults={results} setRestId={setRestId}/>} />
+                <Route exact path="/search" element={<Search searchResults={results} setRestId={setRestId}/>}/>
+                <Route exact path="/detail" element={<Detail restId={restId}/>} />
+                
              </Routes>
              
          </BrowserRouter>
@@ -89,5 +94,4 @@ import yelp from '../api/yelp';
          </>
      )
  }
-
  export default Layout

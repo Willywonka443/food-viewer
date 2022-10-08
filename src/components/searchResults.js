@@ -1,22 +1,36 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import StarIcon from '@mui/icons-material/Star';
 
-const SearchResults = ({food, title }) => {
 
-    return(
+
+
+
+const SearchResults = ({ food, title, setRestId, transactions }) => {
+
+
+  const navigate = useNavigate()
+  const goToDetails = (id) => {
+    setRestId(id)
+    navigate("/detail")
+  }
+
+
+  return (
     <>
-      
+
       {
-          //ternary 
-          (food.length > 0) ?  (<Typography variant="h4">{title}</Typography>
-          ) : (
-            <></>
-          ) 
-          
+        //ternary 
+        (food.length > 0) ? (<Typography variant="h4">{title}</Typography>
+        ) : (
+          <></>
+        )
+
 
       }
 
-      <Grid container spacing={2} sx={{pt:2}}>
+      <Grid container spacing={2} sx={{ pt: 2 }}>
 
 
         {
@@ -36,25 +50,31 @@ const SearchResults = ({food, title }) => {
                         <Typography gutterBottom variant="h5" component="div">
                           {value.name}
                         </Typography>
-                      
-                       <Typography variant="subtitle2" color="text.secondary">
-                        Rating: {value.rating} <br/>
-                        Reviews: {value.review_count} 
-                        </Typography> <br/>
-                        
-                        <Typography variant="body1" color="text.secondary">
-                        {value.location.address1} <br/>
-                        {value.location.city}, {value.location.state} 
-                        </Typography>
+
+                        <Typography variant="subtitle2" color="text.secondary">
+                          <Rating
+                            name="rating"
+                            value={value.rating}
+                            readOnly
+                            precision={0.5}
+                            emptyIcon={<StarIcon style={{ opacity: 1 }} />}
+                          /> <br />
+
+                        </Typography> <br />
                        
+                        <Typography variant="body1" color="text.secondary">
+                          {value.location.address1} <br />
+                          {value.location.city}, {value.location.state}
+                        </Typography>
+
                         <Typography variant="body2" color="text.secondary" fontWeight='bold'>
-                        {value.display_phone}
+                          {value.display_phone}
                         </Typography>
 
                       </CardContent>
                       <CardActions>
-                        <Button size="small">Details</Button>
-                        {/* <Button size="small">Learn More</Button> */}
+                        <Button size="small" onClick={(e) => goToDetails(value.id)}>Details</Button>
+
                       </CardActions>
                     </CardActionArea>
                   </Card>
