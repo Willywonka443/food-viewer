@@ -6,6 +6,7 @@ const Detail = ({restId}) => {
     return (
         <>
 			<Typography> I am the detail page - {restId}</Typography>
+            
         </>		
     )
 }

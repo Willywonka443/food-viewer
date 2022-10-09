@@ -18,7 +18,7 @@ import Detail from './Detail';
     
 
     const searchApi = async (term) => {
-        const response = await yelp('32244', term )
+        const response = await yelp('32244',term )
         console.log(response.data.businesses)
         setResults(response.data.businesses)
     } 
@@ -27,6 +27,7 @@ import Detail from './Detail';
         setSearchText(e.target.value)
         searchApi(e.target.value)
     }
+
 
     useEffect(() => {
         searchApi('Food')
@@ -70,6 +71,7 @@ import Detail from './Detail';
                             
                             
                             />
+                           
 
                             
                          </Typography>
@@ -79,7 +81,8 @@ import Detail from './Detail';
              </Box>
             
 
-             <Typography variant="h6">Your search results:{searchText}</Typography>
+             <Typography variant="h6">Your search results: {searchText}</Typography>
+            
              <Routes>
 
 				
