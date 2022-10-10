@@ -1,4 +1,4 @@
-import { Badge, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from "@mui/material";
+import { Badge, Button, Card, CardActionArea, CardActions, CardContent, CardMedia,Grid,  Rating, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import StarIcon from '@mui/icons-material/Star';
@@ -14,7 +14,7 @@ import ReviewsIcon from '@mui/icons-material/Reviews';
 const SearchResults = ({ food, title, setRestId}) => {
 
 
-
+  
   
   const navigate = useNavigate()
   const goToDetails = (id) => {
@@ -73,8 +73,8 @@ const SearchResults = ({ food, title, setRestId}) => {
                           <Badge badgeContent={value.review_count}   max={99999} color="primary" >
                             <ReviewsIcon/>
                           </Badge> <br/>
-                        
 
+                        
 
 
                         <Typography variant="body1" color="text.secondary">
