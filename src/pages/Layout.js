@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Search from './Search'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
-import yelp from '../api/yelp';
+// import yelp from '../api/yelp';
 import Detail from './Detail';
 
 
@@ -18,9 +18,15 @@ import Detail from './Detail';
     
 
     const searchApi = async (term) => {
-        const response = await yelp('32244',term )
-        console.log(response.data.businesses)
-        setResults(response.data.businesses)
+        // const response = await yelp('32244',term )
+        // console.log(response.data.businesses)
+        // setResults(response.data.businesses)
+        const location = '32244'
+
+        const response2 = await fetch(`/api/yelp?term=${term}&location=${location}`)
+        const data = await response2.json()
+        console.log(data)
+        setResults(data.businesses)
     } 
 
     const doSearch = (e) => {
@@ -30,7 +36,7 @@ import Detail from './Detail';
 
 
     useEffect(() => {
-        searchApi('Food')
+        searchApi('mexican')
     } , [])
 
      return (
