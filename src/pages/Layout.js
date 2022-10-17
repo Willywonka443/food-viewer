@@ -23,9 +23,9 @@ import Detail from './Detail';
         // setResults(response.data.businesses)
         const location = '32244'
 
-        const response2 = await fetch(`/api/yelp?term=${term}&location=${location}`)
+        const response2 = await fetch(`/api/yelp?location=${location}&term=${term}`)
         const data = await response2.json()
-        console.log(data)
+        console.log(data.businesses)
         setResults(data.businesses)
     } 
 

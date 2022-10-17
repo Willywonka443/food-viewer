@@ -1,8 +1,10 @@
-import { Badge, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from "@mui/material";
+import { Badge, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, Grid, ListItem, Rating, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import StarIcon from '@mui/icons-material/Star';
 import ReviewsIcon from '@mui/icons-material/Reviews';
+import { DeliveryDining, TakeoutDining  } from "@mui/icons-material";
+import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 
 
 
@@ -67,6 +69,8 @@ const SearchResults = ({ food, title, setRestId}) => {
                             precision={0.5}
                             emptyIcon={<StarIcon style={{ opacity: 1 }} />}
                           /> <br />
+                        
+                          
 
                         </Typography> <br/>
 
@@ -74,7 +78,32 @@ const SearchResults = ({ food, title, setRestId}) => {
                           <Badge badgeContent={value.review_count}   max={99999} color="primary" >
                             <ReviewsIcon/>
                           </Badge> <br/>
+                          {
+                          value.transactions.map( (value2) => {
+                            let icon;
+                           
+                          
+                            if (value2 === "delivery") {
+                              icon = <DeliveryDining/>;
+                            }
+                            if (value2 === "pickup") {
+                              icon = <TakeoutDining/>;
+                            }
+                            if (value2 === "restaurant_reservation"){
+                              icon = <DinnerDiningIcon/>
+                            }
+                            return(
 
+                                    <ListItem >
+                                      <Chip
+                                        icon={icon} 
+                                        label={value2}
+                                      />
+                                    </ListItem>
+                                  );
+                                })
+                                
+                            }
 
                         <Typography variant="body1" color="text.secondary">
                           {value.location.address1} <br />
