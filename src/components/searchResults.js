@@ -104,6 +104,7 @@ const SearchResults = ({ food, title, setRestId}) => {
                                 })
                                 
                             }
+                         
 
                         <Typography variant="body1" color="text.secondary">
                           {value.location.address1} <br />
@@ -116,7 +117,7 @@ const SearchResults = ({ food, title, setRestId}) => {
 
                       </CardContent>
                       <CardActions>
-                        <Button size="small" onClick={(e) => goToDetails(value.id)}>Details</Button>
+                        <Button size="small" onClick={(e) => goToDetails(<Button href={value.url}>Website</Button>)}>Details</Button>
 
                       </CardActions>
                     </CardActionArea>
