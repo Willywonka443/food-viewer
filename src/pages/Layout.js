@@ -12,18 +12,19 @@ import Detail from './Detail';
 
 
  const Layout = () => {
-    const [searchText, setSearchText ]   = useState("I'm here. Good")
+    const [searchText, setSearchText ]   = useState("Mexican")
+    const [searchZip, setSearchZip] = useState("32244")
     const [results, setResults] = useState([])
     const [restId, setRestId] = useState('Nothing to see here')
     
 
-    const searchApi = async (term) => {
+    const searchApi = async (term, location) => {
         // const response = await yelp('32244',term )
         // console.log(response.data.businesses)
         // setResults(response.data.businesses)
-        const location = '32244'
+        
 
-        const response2 = await fetch(`/api/yelp?location=${location}&term=${term}`)
+        const response2 = await fetch(`/api/yelp?term=${term}&location=${location}`)
         const data = await response2.json()
         console.log(data.businesses)
         setResults(data.businesses)
@@ -31,12 +32,15 @@ import Detail from './Detail';
 
     const doSearch = (e) => {
         setSearchText(e.target.value)
-        searchApi(e.target.value)
+        searchApi(e.target.value, searchZip)
+    }
+    const doZip = (zip) => {
+        setSearchZip(zip.target.value)
+        searchApi(searchText, zip.target.value)
     }
 
-
     useEffect(() => {
-        searchApi('mexican')
+        searchApi('mexican','32244')
     } , [])
 
      return (
@@ -55,17 +59,39 @@ import Detail from './Detail';
                          >
                              <MenuIcon />
                          </IconButton>
-                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>  
                             <TextField 
                             
                             onKeyPress={
                                 (e) => {
                                     if (e.key === "Enter"){
-                                        doSearch( e)
+                                        doSearch(e)
                                     }
                                 }
                             }
                             label="Search" 
+                            variant='outlined'
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start" >
+                                        <SearchIcon/>
+                                    </InputAdornment>
+                                )
+                            }}
+                            
+                            
+                            />
+
+                            <TextField 
+                            
+                            onKeyPress={
+                                (zip) => {
+                                    if (zip.key === "Enter"){
+                                        doZip( zip)
+                                    }
+                                }
+                            }
+                            label="Zip Code" 
                             variant='outlined'
                             InputProps={{
                                 startAdornment: (
@@ -88,6 +114,7 @@ import Detail from './Detail';
             
 
              <Typography variant="h6">Your search results: {searchText}</Typography>
+             <Typography variant="h6">Your search results: {searchZip}</Typography>
             
              <Routes>
 

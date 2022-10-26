@@ -98,6 +98,7 @@ const SearchResults = ({ food, title, setRestId}) => {
                                       <Chip
                                         icon={icon} 
                                         label={value2}
+                                        
                                       />
                                     </ListItem>
                                   );
